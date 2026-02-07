@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录 | 原型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="登录页面原型（TailwindCSS）" />
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-900">
+    <div class="min-h-screen grid lg:grid-cols-2">
+      <!-- Left: Form -->
+      <main class="flex items-center justify-center p-6">
+        <div class="w-full max-w-md">
+          <div class="mb-6">
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-xl bg-slate-900"></div>
+              <div>
+                <div class="text-lg font-semibold leading-tight">YourApp</div>
+                <div class="text-sm text-slate-500">欢迎回来</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <header class="mb-6">
+              <h1 class="text-xl font-semibold">登录</h1>
+              <p class="mt-1 text-sm text-slate-500">使用邮箱登录你的账号</p>
+            </header>
+
+            <div class="space-y-3">
+              <button type="button" class="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium hover:bg-slate-50 active:bg-slate-100">
+                <span class="inline-block h-4 w-4 rounded bg-slate-200"></span>
+                使用 Google 继续
+              </button>
+              <button type="button" class="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium hover:bg-slate-50 active:bg-slate-100">
+                <span class="inline-block h-4 w-4 rounded bg-slate-200"></span>
+                使用 Apple 继续
+              </button>
+
+              <div class="relative py-2">
+                <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                  <div class="w-full border-t border-slate-200"></div>
+                </div>
+                <div class="relative flex justify-center">
+                  <span class="bg-white px-3 text-xs text-slate-500">或</span>
+                </div>
+              </div>
+            </div>
+
+            <form class="mt-2 space-y-4" onsubmit="event.preventDefault(); document.getElementById('toast').classList.remove('hidden');">
+              <div>
+                <label class="block text-sm font-medium" for="identifier">邮箱</label>
+                <input id="identifier" name="identifier" type="email" autocomplete="username" inputmode="email" placeholder="you@example.com" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none ring-0 focus:border-slate-400" />
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between">
+                  <label class="block text-sm font-medium" for="password">密码</label>
+                  <a href="#" class="text-sm font-medium text-slate-900 hover:underline">忘记密码？</a>
+                </div>
+                <div class="mt-1 relative">
+                  <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 pr-12 text-sm outline-none focus:border-slate-400" />
+                  <button type="button" class="absolute inset-y-0 right-0 px-3 text-xs font-medium text-slate-500 hover:text-slate-900" onclick="togglePassword()">显示</button>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <label class="inline-flex items-center gap-2 text-sm text-slate-700">
+                  <input type="checkbox" class="h-4 w-4 rounded border-slate-300" />
+                  记住我
+                </label>
+                <div class="text-xs text-slate-500">建议在个人设备使用</div>
+              </div>
+
+              <button type="submit" class="w-full rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 active:bg-slate-950">登录</button>
+
+              <p class="text-center text-sm text-slate-600">
+                还没有账号？
+                <a href="#" class="font-semibold text-slate-900 hover:underline">注册</a>
+              </p>
+            </form>
+
+            <div class="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-600">
+              <div class="font-semibold text-slate-800">原型说明</div>
+              <ul class="mt-1 list-disc pl-4 space-y-1">
+                <li>支持第三方登录（按钮占位）。</li>
+                <li>邮箱/手机号 + 密码登录。</li>
+                <li>提交后仅弹出提示（无后端）。</li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="toast" class="hidden mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
+            已提交登录（原型行为）。接下来可以接入：校验、错误提示、验证码/2FA。
+          </div>
+
+          <footer class="mt-6 text-center text-xs text-slate-500">
+            <span>©</span> <span id="year"></span> YourApp · <a class="hover:underline" href="#">隐私政策</a> · <a class="hover:underline" href="#">服务条款</a>
+          </footer>
+        </div>
+      </main>
+
+      <!-- Right: Promo -->
+      <aside class="hidden lg:block relative overflow-hidden bg-slate-900">
+        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 20%, #fff 0, transparent 40%), radial-gradient(circle at 80% 30%, #fff 0, transparent 35%), radial-gradient(circle at 50% 80%, #fff 0, transparent 45%);"></div>
+        <div class="relative h-full flex items-center p-10">
+          <div class="max-w-lg text-white">
+            <h2 class="text-3xl font-semibold leading-tight">把你的数据变成每日可执行的反馈</h2>
+            <p class="mt-4 text-white/80">这是一个适合讨论的信息结构原型：左侧登录、右侧产品价值与截图占位。你可以把这里替换成真实的宣传图/动效。</p>
+
+            <div class="mt-8 grid grid-cols-3 gap-3">
+              <div class="rounded-2xl bg-white/10 p-4">
+                <div class="text-sm font-semibold">更快</div>
+                <div class="mt-1 text-xs text-white/70">减少 30% 操作成本（占位）</div>
+              </div>
+              <div class="rounded-2xl bg-white/10 p-4">
+                <div class="text-sm font-semibold">更稳</div>
+                <div class="mt-1 text-xs text-white/70">登录风控/2FA 可扩展</div>
+              </div>
+              <div class="rounded-2xl bg-white/10 p-4">
+                <div class="text-sm font-semibold">更清晰</div>
+                <div class="mt-1 text-xs text-white/70">错误提示与引导位</div>
+              </div>
+            </div>
+
+            <div class="mt-8 rounded-3xl bg-white/10 p-6">
+              <div class="text-sm font-semibold">截图/动效占位</div>
+              <div class="mt-3 h-48 rounded-2xl bg-white/10 border border-white/10"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      function togglePassword() {
+        const input = document.getElementById('password');
+        const btn = event.currentTarget;
+        const isPwd = input.type === 'password';
+        input.type = isPwd ? 'text' : 'password';
+        btn.textContent = isPwd ? '隐藏' : '显示';
+      }
+    </script>
+  </body>
+</html>
